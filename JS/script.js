@@ -2,9 +2,7 @@ let elementoFormulario = document.querySelector(".js-formulario");
 let elementoResultado = document.querySelector(".js-resultado");
 let elementoCarregamento = document.querySelector(".js-carregamento");
 let elementoResultadoTitulo = document.querySelector(".js-resultado__titulo");
-let elementoResultadoDescricao = document.querySelector(
-  ".js-resultado__descricao"
-);
+let elementoResultadoDescricao = document.querySelector(".js-resultado__descricao");
 
 function erroPalavraNaoEncontrada() {
   elementoResultadoTitulo.textContent =
@@ -26,7 +24,7 @@ function parserXML(data) {
     titulo: "",
     descricao: "",
   };
-  funcaoDeParseamento = new DOMParser();
+  let funcaoDeParseamento = new DOMParser();
 
   resposta.titulo = funcaoDeParseamento
     .parseFromString(data, "text/xml")
@@ -47,7 +45,8 @@ function inserirRespostas(objRespostas) {
 }
 
 function requisicaoFormulario(palavraParaBuscar) {
-  let url = `https://api.dicionario-aberto.net/word/${palavraParaBuscar}`;
+  let palavraNormalizada = palavraParaBuscar.toLowerCase(); // Normaliza a palavra para minúsculas
+  let url = `https://api.dicionario-aberto.net/word/${palavraNormalizada}`;
 
   fetch(url)
     .then((resposta) => resposta.json())
