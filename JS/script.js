@@ -3,6 +3,20 @@ let elementoResultado = document.querySelector(".js-resultado");
 let elementoCarregamento = document.querySelector(".js-carregamento");
 let elementoResultadoTitulo = document.querySelector(".js-resultado__titulo");
 let elementoResultadoDescricao = document.querySelector(".js-resultado__descricao");
+let elementoCard = document.querySelector(".card"); 
+let elementoInput = document.querySelector('input[type="text"]'); 
+
+elementoCard.classList.add("flutuando");
+
+elementoInput.addEventListener("focus", () => {
+  elementoCard.classList.remove("flutuando");
+});
+
+elementoInput.addEventListener("blur", () => {
+  if (elementoInput.value.trim() === "") {
+    elementoCard.classList.add("flutuando");
+  }
+});
 
 function erroPalavraNaoEncontrada() {
   elementoResultadoTitulo.textContent =
@@ -45,7 +59,7 @@ function inserirRespostas(objRespostas) {
 }
 
 function requisicaoFormulario(palavraParaBuscar) {
-  let palavraNormalizada = palavraParaBuscar.toLowerCase(); // Normaliza a palavra para minúsculas
+  let palavraNormalizada = palavraParaBuscar.toLowerCase(); 
   let url = `https://api.dicionario-aberto.net/word/${palavraNormalizada}`;
 
   fetch(url)
